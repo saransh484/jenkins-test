@@ -32,7 +32,7 @@ pipeline {
 				script: """
 					curl -X GET \
                          		https://13.232.34.46/api/stacks \
-                         		-H 'Authorization: ${JWT_TOKEN}'
+                         		-H 'Authorization: Bearer ${JWT_TOKEN}'
 				"""
 				)
 				echo "${stackInfo}"
