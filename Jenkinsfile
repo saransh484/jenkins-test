@@ -18,6 +18,7 @@ pipeline {
                                  -d '{"Username":"$PORTAINER_USR", "Password":"$PORTAINER_PSW"}'
                         """
                     )
+		    echo "Auth response: ${authResponse}"
                 }
             }
         }
