@@ -18,8 +18,8 @@ pipeline {
                                  -d '{"Username":"$PORTAINER_USR", "Password":"$PORTAINER_PSW"}'
                         """
                     )
-		    env.JWT_TOKEN = "Bearer ${authResponse.jwt}"
-                    echo ${JWT_TOKEN}
+		    	
+		    // env.JWT_TOKEN = "Bearer ${authResponse.jwt}"
                 }
             }
         }
