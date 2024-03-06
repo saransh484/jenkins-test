@@ -11,7 +11,12 @@ pipeline {
                       usernameVariable: 'PORTAINER_USERNAME',
                       passwordVariable: 'PORTAINER_PASSWORD')
                     ]){
-			sh " curl -X POST https://13.232.34.46/api/auth -H 'Content-Type: application/json' -d '{"Username":"$PORTAINER_USERNAME", "Password":"$PORTAINER_PASSWORD"}' "
+		    sh """
+                    curl -X POST \
+                         https://13.232.34.46/api/auth \
+                         -H 'Content-Type: application/json' \
+                         -d '{"Username":"${PORTAINER_USERNAME}", "Password":"${PORTAINER_PASSWORD}"}'
+                    """
 		    }
 		    
                 }
