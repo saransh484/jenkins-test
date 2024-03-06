@@ -18,8 +18,6 @@ pipeline {
                                  -d '{"Username":"$PORTAINER_USR", "Password":"$PORTAINER_PSW"}'
                         """
                     )
-		    def jsonResponse = readJSON text: authResponse
-                    env.JWT_TOKEN = jsonResponse.jwt 	
                 }
             }
         }
@@ -31,7 +29,7 @@ pipeline {
 				script: """
 					curl -X GET \
                          		https://13.232.34.46/api/stacks \
-                         		-H 'Authorization: ${JWT_TOKEN}'
+                         		-H 'Authorization: '
 				"""
 				)
 			}
