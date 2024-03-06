@@ -19,7 +19,7 @@ pipeline {
                         """
                     )
 		    env.JWT_TOKEN = "Bearer ${authResponse.jwt}"
-                
+                    echo ${JWT_TOKEN}
                 }
             }
         }
