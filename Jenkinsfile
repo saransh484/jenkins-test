@@ -24,14 +24,16 @@ pipeline {
             }
         }
 	stage("Getting Stack info"){
-		script{
-			def stackInfo = sh(
-			returnStdout: true,
-			script: """
-				curl https://13.232.34.46/api/stacks \
-				-H "Authorization: $JWTTOKEN"
-			"""
-			)
+		steps{
+			script{
+				def stackInfo = sh(
+				returnStdout: true,
+				script: """
+					curl https://13.232.34.46/api/stacks \
+					-H "Authorization: $JWTTOKEN"
+				"""
+				)
+			}
 		}
 	}
     }
