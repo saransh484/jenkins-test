@@ -56,6 +56,7 @@ pipeline {
                          		https://13.232.34.46/api/stacks/${STK_ID}/file \
                          		-H 'Authorization: Bearer ${JWT_TOKEN}'
 				"""
+				)
 	
 			}
 		}
