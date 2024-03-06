@@ -2,8 +2,7 @@ pipeline {
     agent any
     
     environment {
-        PORTAINER_USERNAME = credentials('portainer-username')
-        PORTAINER_PASSWORD = credentials('portainer-password')
+        PORTAINER = credentials('Portainer')
     }
     
     stages {
@@ -16,7 +15,7 @@ pipeline {
                             curl -X POST \
                                  https://13.232.34.46/api/auth \
                                  -H 'Content-Type: application/json' \
-                                 -d '{"Username":"${PORTAINER_USERNAME}", "Password":"${PORTAINER_PASSWORD}"}'
+                                 -d '{"Username":"$PORTAINER_USR", "Password":"$PORTAINER_PSW"}'
                         """
                     )
                     
