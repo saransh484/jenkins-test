@@ -37,7 +37,7 @@ pipeline {
 				)
 				echo "${stackInfo}"
             			
-            			stackInfo[0]
+            			echo "${stackInfo[0]}"
             			
 			}
 		}
