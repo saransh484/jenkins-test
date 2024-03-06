@@ -40,7 +40,7 @@ pipeline {
             			stackInfo.each { stack ->
               				println(stack)
 					}
-            			}
+            			
 			}
 		}
 	}
