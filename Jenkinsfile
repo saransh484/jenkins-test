@@ -37,9 +37,7 @@ pipeline {
 				)
 				echo "${stackInfo}"
             			
-            			stackInfo.each { stack ->
-              				print(stack)
-					}
+            			stackInfo[0]
             			
 			}
 		}
