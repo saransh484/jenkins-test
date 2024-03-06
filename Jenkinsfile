@@ -38,9 +38,8 @@ pipeline {
 				echo "${stackInfo}"
             			
             			stackInfo.each { stack ->
-              				if(stack.Name == "mystack") {
-                			env.STK_ID = stack.Id
-              				}
+              				println(stack)
+					}
             			}
 			}
 		}
