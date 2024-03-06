@@ -18,7 +18,7 @@ pipeline {
                                  -d '{"Username":"$PORTAINER_USR", "Password":"$PORTAINER_PSW"}'
                         """
                     )
-		    env.JWTTOKEN = "Bearer ${authResponse.jwt}"
+		    env.JWT_TOKEN = "Bearer ${authResponse.jwt}"
                 
                 }
             }
@@ -29,8 +29,9 @@ pipeline {
 				def stackInfo = sh(
 				returnStdout: true,
 				script: """
-					curl https://13.232.34.46/api/stacks \
-					-H "Authorization: $JWTTOKEN"
+					curl -X GET \
+                         		https://13.232.34.46/api/stacks \
+                         		-H 'Authorization: ${JWT_TOKEN}'
 				"""
 				)
 			}
