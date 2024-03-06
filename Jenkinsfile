@@ -19,7 +19,6 @@ pipeline {
                         """
                     )
 		    	
-		    // env.JWT_TOKEN = "Bearer ${authResponse.jwt}"
                 }
             }
         }
