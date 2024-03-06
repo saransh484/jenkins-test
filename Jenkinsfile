@@ -18,8 +18,10 @@ pipeline {
                                  -d '{"Username":"$PORTAINER_USR", "Password":"$PORTAINER_PSW"}'
                         """
                     )
-		    echo "Auth response: ${authResponse.jwt}"
-                }
+		    echo "Auth response: ${authResponse}"
+                    def jsonResponse = readJSON text: authResponse
+                    env.JWT_TOKEN = jsonResponse.jwt
+		}
             }
         }
 	stage("Getting Stack info"){
