@@ -1,39 +1,28 @@
 pipeline {
     agent any
-
+    
+    environment {
+        PORTAINER_USERNAME = credentials('portainer-username')
+        PORTAINER_PASSWORD = credentials('portainer-password')
+    }
+    
     stages {
-        stage('portainer test') {
+        stage('Portainer Auth') {
             steps {
                 script {
-                  withCredentials(
-                    [usernamePassword(
-                      credentialsId: 'Portainer',
-                      usernameVariable: 'PORTAINER_USERNAME',
-                      passwordVariable: 'PORTAINER_PASSWORD')
-                    ]){
-		    sh """
-                    curl -X POST \
-                         https://13.232.34.46/api/auth \
-                         -H 'Content-Type: application/json' \
-                         -d '{"Username":"${PORTAINER_USERNAME}", "Password":"${PORTAINER_PASSWORD}"}'
-                    """
-		    }
-		    
+                    def authResponse = sh(
+                        returnStdout: true,
+                        script: """
+                            curl -X POST \
+                                 https://13.232.34.46/api/auth \
+                                 -H 'Content-Type: application/json' \
+                                 -d '{"Username":"${PORTAINER_USERNAME}", "Password":"${PORTAINER_PASSWORD}"}'
+                        """
+                    )
+                    
+                    // Process the authResponse as needed
+                    echo "Auth response: ${authResponse}"
                 }
-            }
-        }
-
-        stage('connection test') {
-            steps {
-                // Test steps
-		echo 'connected'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Deploy steps
-                echo 'Deploying the application...'
             }
         }
     }
