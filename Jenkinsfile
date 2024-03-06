@@ -24,7 +24,7 @@ pipeline {
 		}
             }
         }
-	stage("Getting Stack info"){
+	stage("Getting Stack ID"){
 		steps{
 			script{
 				def stackInfo = sh(
@@ -36,6 +36,27 @@ pipeline {
 				"""
 				)
 				echo "${stackInfo}"
+				def stacks = new groovy.json.JsonSlurper().parseText(stackInfo.getContent())
+            
+            			stacks.each { stack ->
+              				if(stack.Name == "mystack") {
+                			env.STK_ID = stack.Id
+              				}
+            			}
+			}
+		}
+	}
+	stage("Getting Stack Files"){
+		steps{
+			script{
+				def stackInfo = sh(
+				returnStdout: true,
+				script: """
+					curl -X GET \
+                         		https://13.232.34.46/api/stacks/${STK_ID}/file \
+                         		-H 'Authorization: Bearer ${JWT_TOKEN}'
+				"""
+	
 			}
 		}
 	}
