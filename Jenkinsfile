@@ -36,9 +36,8 @@ pipeline {
 				"""
 				)
 				echo "${stackInfo}"
-				def stacks = new groovy.json.JsonSlurper().parseText(stackInfo.getContent())
-            
-            			stacks.each { stack ->
+            			
+            			stackInfo.each { stack ->
               				if(stack.Name == "mystack") {
                 			env.STK_ID = stack.Id
               				}
