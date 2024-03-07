@@ -60,7 +60,7 @@ pipeline {
 				)
 				echo "${stackInfo}"
 				String gitCommitAuthorName = getAuthorName()
-				echo "AUTHOR NAME => ${gitCommitAuthorName}"	
+				echo "AUTHOR NAME = ${gitCommitAuthorName}"	
 			}
 		}
 	}
