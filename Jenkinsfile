@@ -27,7 +27,7 @@ pipeline {
 	stage("Getting Stack ID"){
 		steps{
 			script{
-				def stackInfo = sh(
+				def stackRes = sh(
 				returnStdout: true,
 				script: """
 					curl -X GET \
@@ -35,9 +35,9 @@ pipeline {
                          		-H 'Authorization: Bearer ${JWT_TOKEN}'
 				"""
 				)
-				echo "${stackInfo}"
+				echo "${stackRes}"
             			
-				def stacks = new groovy.json.JsonSlurper().parseText(stackInfo)
+				def stacks = new groovy.json.JsonSlurper().parseText(stackRes)
             
             			stacks.each { stack ->
               				if(stack.Name == "mystack") {
@@ -58,6 +58,7 @@ pipeline {
                          		-H 'Authorization: Bearer ${JWT_TOKEN}'
 				"""
 				)
+				echo "${stackInfo}"
 	
 			}
 		}
