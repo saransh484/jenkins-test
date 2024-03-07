@@ -59,20 +59,21 @@ pipeline {
 				"""
 				)
 				echo "${stackInfo}"
-				String gitCommitAuthorName = getAuthorName()
-				echo "AUTHOR NAME = ${gitCommitAuthorName}"	
+				String gitCommitId = getGitcommitID()
+				println("GIT CommitID: " + gitCommitID)
+
+				}
 			}
 		}
-	}
     }
 }
 @NonCPS
-String getAuthorName(){
-    gitAuthorName = " "
+String getGitcommitID(){
+    gitCommitID = " "
     for ( changeLogSet in currentBuild.changeSets){
         for (entry in changeLogSet.getItems()){
-            gitAuthorName = entry.authorName
+            gitCommitID = entry.commitId
         }
     }
-    return gitAuthorName
+    return gitCommitID
 }
