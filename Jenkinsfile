@@ -38,9 +38,9 @@ pipeline {
 				echo "${stackRes}"
             			
 				def stacks = new groovy.json.JsonSlurper().parseText(stackRes)
-            
+           			String REGEX = "mystack.*" 
             			stacks.each { stack ->
-              				if(stack.Name == "mystack") {
+              				if(stack.Name ==~ REGEX) {
                 			env.STK_ID = stack.Id
               				}
             			}	
@@ -59,9 +59,20 @@ pipeline {
 				"""
 				)
 				echo "${stackInfo}"
-	
+				String gitCommitAuthorName = getAuthorName()
+				echo "AUTHOR NAME = ${gitCommitAuthorName}"	
 			}
 		}
 	}
     }
+}
+@NonCPS
+String getAuthorName(){
+    gitAuthorName = " "
+    for ( changeLogSet in currentBuild.changeSets){
+        for (entry in changeLogSet.getItems()){
+            gitAuthorName = entry.authorName
+        }
+    }
+    return gitAuthorName
 }
